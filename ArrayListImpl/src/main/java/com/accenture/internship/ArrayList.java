@@ -5,19 +5,19 @@ package com.accenture.internship;
 import java.util.*;
 
 
-public class MyArrayListImpl implements MyList {
+public class ArrayList implements List {
 
     private static final int DEFAULT_CAPACITY = 10;
     private Object[] array;
     private int size;
 
 
-    public MyArrayListImpl() {
+    public ArrayList() {
         this.array = new Object[DEFAULT_CAPACITY];
         this.size = 0;
     }
 
-    public MyArrayListImpl(Object[] array, int size) {
+    public ArrayList(Object[] array, int size) {
         this.array = array;
         this.size = size;
     }
@@ -37,18 +37,18 @@ public class MyArrayListImpl implements MyList {
 
     @Override
     public void add(Object element, int index) {
-        if (index > myListSize()) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", List size: " + myListSize());
+        if (index > size()) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", List size: " + size());
         }
-        if (index == myListSize()) {
+        if (index == size()) {
             add(element);
         } else {
-            if (myListSize() == array.length) {
+            if (size() == array.length) {
                 Object[] newArray = new Object[size * 2];
                 System.arraycopy(array, 0, newArray, 0, array.length);
                 array = newArray;
             }
-            for (int i = myListSize(); i > index; i--) {
+            for (int i = size(); i > index; i--) {
                 array[i] = array[i - 1];
             }
             array[index] = element;
@@ -57,7 +57,7 @@ public class MyArrayListImpl implements MyList {
     }
 
     @Override
-    public int myListSize() {
+    public int size() {
         int count = 0;
         while (array[count] != null) {
             count++;
@@ -76,7 +76,7 @@ public class MyArrayListImpl implements MyList {
     @Override
     public int indexOf(Object element) {
         int index = -1;
-        for (int i = 0; i < myListSize(); i++) {
+        for (int i = 0; i < size(); i++) {
             if (array[i].equals(element)) {
                 return i;
             }
@@ -86,7 +86,7 @@ public class MyArrayListImpl implements MyList {
 
     @Override
     public boolean hasNext(Object element) {
-        return indexOf(element) < myListSize() - 1 && indexOf(element) >= 0;
+        return indexOf(element) < size() - 1 && indexOf(element) >= 0;
     }
 
 
@@ -103,7 +103,7 @@ public class MyArrayListImpl implements MyList {
     public void remove(int index) {
         if (index >= size)
             throw new IndexOutOfBoundsException();
-        if (index != myListSize()) {
+        if (index != size()) {
             for (int i = index; i < size; i++) {
                 array[i] = array[i + 1];
             }
@@ -135,7 +135,7 @@ public class MyArrayListImpl implements MyList {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MyArrayListImpl that = (MyArrayListImpl) o;
+        ArrayList that = (ArrayList) o;
         return size == that.size && Arrays.equals(array, that.array);
     }
 

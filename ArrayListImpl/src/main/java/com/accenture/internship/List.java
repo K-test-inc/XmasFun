@@ -1,11 +1,11 @@
 package com.accenture.internship;
 
-public interface MyList {
+public interface List {
     void add(Object element);
 
     void add(Object element, int index);
 
-    int myListSize();
+    int size();
 
     Object get(int index);
 
