@@ -3,6 +3,10 @@ package com.accenture.internship;
 public interface List<T> {
     void add(T element);
 
+    void addFirst(T element);
+
+    void addLast(T element);
+
     void add(T element, int index);
 
     int size();

@@ -10,7 +10,10 @@ public class Main {
     public void arrayListImpl(){
 
         //Constructs an empty list with an initial capacity of ten.
-        List arrayList = new ArrayList();
+        List<String> arrayList = new ArrayList<>();
+
+        //Adds a new element to the first position of the list.
+        arrayList.addFirst("test0");
 
         //Adds a new element to the end of the list.
         arrayList.add("test1");
@@ -18,6 +21,9 @@ public class Main {
         arrayList.add("test3");
         arrayList.add("test1");
         arrayList.add("test1");
+
+        //Adds a new element to the end of the list.
+        arrayList.addLast("test5");
 
         //Replaces the element at the specified position in this list with the specified element.
         arrayList.add("newElement", 1);

@@ -1,16 +1,12 @@
 package com.accenture.internship;
 
-
-
 import java.util.*;
-
 
 public class ArrayList<T> implements List<T> {
 
     private static final int DEFAULT_CAPACITY = 10;
     private Object[] array;
     private int size;
-
 
     public ArrayList() {
         this.array = new Object[DEFAULT_CAPACITY];
@@ -23,6 +19,24 @@ public class ArrayList<T> implements List<T> {
     }
 
     public void add(T element) {
+        if(size == 0)
+            addFirst(element);
+        else
+            addLast(element);
+    }
+
+    @Override
+    public void addFirst(T element) {
+        if (size == 0) {
+            array[0] = element;
+            size++;
+        }else{
+            add(element, 0);
+        }
+    }
+
+    @Override
+    public void addLast(T element) {
 
         if (size >= array.length) {
             Object[] newArray = new Object[size * 2];
@@ -39,7 +53,7 @@ public class ArrayList<T> implements List<T> {
             throw new IndexOutOfBoundsException("Index: " + index + ", List size: " + size());
         }
         if (index == size()) {
-            add(element);
+            addLast(element);
         } else {
             if (size() == array.length) {
                 Object[] newArray = new Object[size * 2];
@@ -110,11 +124,10 @@ public class ArrayList<T> implements List<T> {
     }
 
 
-
     @Override
     public void remove(T element) {
         int index = indexOf(element);
-        if(index >= 0){
+        if (index >= 0) {
             remove(index);
             remove(element);
         }

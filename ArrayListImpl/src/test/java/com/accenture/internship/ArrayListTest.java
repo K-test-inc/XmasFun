@@ -10,42 +10,134 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ArrayListTest extends TestCase {
 
-    @Test
     public void testAddingTwoElements() {
 
         String[] array = new String[]{"test1", "test2", null, null, null, null, null, null, null, null};
-        ArrayList expectedList = new ArrayList(array, 2);
+        ArrayList<String> expectedList = new ArrayList<>(array, 2);
 
-        ArrayList myList = new ArrayList();
-        myList.add(new String("test1"));
-        myList.add(new String("test2"));
+        ArrayList<String> myList = new ArrayList<>();
+        myList.add("test1");
+        myList.add("test2");
         assertEquals(2, myList.size());
         assertEquals(expectedList, myList);
 
     }
 
-    @Test
     public void testAddingElevenElements() {
 
         String[] array = new String[]{"test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9",
                 "test10", "test11", null, null, null, null, null, null, null, null, null};
-        ArrayList expectedList = new ArrayList(array, 11);
+        ArrayList<String> expectedList = new ArrayList<>(array, 11);
 
-        ArrayList myList = new ArrayList();
-        myList.add(new String("test1"));
-        myList.add(new String("test2"));
-        myList.add(new String("test3"));
-        myList.add(new String("test4"));
-        myList.add(new String("test5"));
-        myList.add(new String("test6"));
-        myList.add(new String("test7"));
-        myList.add(new String("test8"));
-        myList.add(new String("test9"));
-        myList.add(new String("test10"));
-        myList.add(new String("test11"));
+        ArrayList<String> myList = new ArrayList<>();
+        myList.add("test1");
+        myList.add("test2");
+        myList.add("test3");
+        myList.add("test4");
+        myList.add("test5");
+        myList.add("test6");
+        myList.add("test7");
+        myList.add("test8");
+        myList.add("test9");
+        myList.add("test10");
+        myList.add("test11");
         assertEquals(11, myList.size());
         assertEquals(expectedList, myList);
 
+    }
+
+    public void testAddingFirstElement_EmptyArray() {
+
+        String[] array = new String[]{"test1", null, null, null, null, null, null, null, null, null};
+        ArrayList<String> expectedList = new ArrayList<>(array, 1);
+
+        ArrayList<String> myList = new ArrayList<>();
+        myList.addFirst("test1");
+
+        assertEquals(1, myList.size());
+        assertEquals(expectedList, myList);
+    }
+
+    public void testAddingFirstElement_NotEmptyArray() {
+
+        String[] array = new String[]{"test2", "test1", null, null, null, null, null, null, null, null};
+        ArrayList<String> expectedList = new ArrayList<>(array, 2);
+
+        ArrayList<String> myList = new ArrayList<>();
+        myList.addFirst("test1");
+        myList.addFirst("test2");
+
+        assertEquals(2, myList.size());
+        assertEquals(expectedList, myList);
+    }
+
+    public void testAddingFirstElement_NotEmptyLongArray() {
+
+        String[] array = new String[]{"test11", "test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8",
+                "test9", "test10", null, null, null, null, null, null, null, null, null};
+        ArrayList<String> expectedList = new ArrayList<>(array, 11);
+
+        ArrayList<String> myList = new ArrayList<>();
+        myList.add("test1");
+        myList.add("test2");
+        myList.add("test3");
+        myList.add("test4");
+        myList.add("test5");
+        myList.add("test6");
+        myList.add("test7");
+        myList.add("test8");
+        myList.add("test9");
+        myList.add("test10");
+        myList.addFirst("test11");
+        assertEquals(11, myList.size());
+        assertEquals(expectedList, myList);
+    }
+
+    public void testAddingLastElement_NotEmptyArray() {
+
+        String[] array = new String[]{"test1", "test2", null, null, null, null, null, null, null, null};
+        ArrayList<String> expectedList = new ArrayList<>(array, 2);
+
+        ArrayList<String> myList = new ArrayList<>();
+        myList.addFirst("test1");
+        myList.addLast("test2");
+
+        assertEquals(2, myList.size());
+        assertEquals(expectedList, myList);
+    }
+
+    public void testAddingLastElement_EmptyArray() {
+
+        String[] array = new String[]{"test1", null, null, null, null, null, null, null, null, null};
+        ArrayList<String> expectedList = new ArrayList<>(array, 1);
+
+        ArrayList<String> myList = new ArrayList<>();
+        myList.addLast("test1");
+
+        assertEquals(1, myList.size());
+        assertEquals(expectedList, myList);
+    }
+
+    public void testAddingLastElement_NotEmptyLongArray() {
+
+        String[] array = new String[]{"test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9",
+                "test10", "test11", null, null, null, null, null, null, null, null, null};
+        ArrayList<String> expectedList = new ArrayList<>(array, 11);
+
+        ArrayList<String> myList = new ArrayList<>();
+        myList.add("test1");
+        myList.add("test2");
+        myList.add("test3");
+        myList.add("test4");
+        myList.add("test5");
+        myList.add("test6");
+        myList.add("test7");
+        myList.add("test8");
+        myList.add("test9");
+        myList.add("test10");
+        myList.addLast("test11");
+        assertEquals(11, myList.size());
+        assertEquals(expectedList, myList);
     }
 
     @Test
