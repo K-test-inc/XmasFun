@@ -227,7 +227,7 @@ public class ArrayListTest extends TestCase {
         myList.add("test3");
         myList.add("test4");
         myList.add("test5");
-        String obj = (String) myList.get(2);
+        String obj = myList.get(2);
 
         assertEquals("test3", obj);
         assertEquals(5, myList.size());

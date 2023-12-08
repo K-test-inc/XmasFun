@@ -49,8 +49,8 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public void add(T element, int index) {
-        if (index > size()) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", List size: " + size());
+        if (index > size() || index < 0) {
+            throw new IndexOutOfBoundsException();
         }
         if (index == size()) {
             addLast(element);
@@ -70,14 +70,7 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public int size() {
-        int count = 0;
-        while (array[count] != null) {
-            count++;
-            if (count == size) {
-                break;
-            }
-        }
-        return count;
+        return size;
     }
 
     @Override

@@ -1,13 +1,37 @@
 package com.accenture.internship;
 
 
+import com.accenture.internship.linkedListImpl.*;
+
 
 public class Main {
     public static void main(String[] args) {
 
+        LinkedList<String> list = new LinkedList<>();
+        list.add("test1");
+        list.add("test2");
+        list.add("test3");
+        list.add("test4");
+        list.add("test5");
+        list.add("test6");
+        list.add("test7");
+        list.add("test8");
+        list.add("test9");
+        list.add("test10");
+        list.add("newTest",10);
+
+        System.out.println(list.get(8));
+        System.out.println(list.get(9));
+        System.out.println(list.get(4));
+        System.out.println(list.get(3));
+        System.out.println(list.get(0));
+        System.out.println(list.get(1));
+        System.out.println(list.get(10));
+
+
     }
 
-    public void arrayListImpl(){
+    public void arrayListImpl() {
 
         //Constructs an empty list with an initial capacity of ten.
         List<String> arrayList = new ArrayList<>();
