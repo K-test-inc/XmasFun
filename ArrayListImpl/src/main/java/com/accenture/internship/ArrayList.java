@@ -5,7 +5,7 @@ package com.accenture.internship;
 import java.util.*;
 
 
-public class ArrayList implements List {
+public class ArrayList<T> implements List<T> {
 
     private static final int DEFAULT_CAPACITY = 10;
     private Object[] array;
@@ -22,9 +22,7 @@ public class ArrayList implements List {
         this.size = size;
     }
 
-    public void add(Object element) {
-
-        //      Node<T> node = new Node<T>((T) element);
+    public void add(T element) {
 
         if (size >= array.length) {
             Object[] newArray = new Object[size * 2];
@@ -36,7 +34,7 @@ public class ArrayList implements List {
     }
 
     @Override
-    public void add(Object element, int index) {
+    public void add(T element, int index) {
         if (index > size()) {
             throw new IndexOutOfBoundsException("Index: " + index + ", List size: " + size());
         }
@@ -69,12 +67,12 @@ public class ArrayList implements List {
     }
 
     @Override
-    public Object get(int index) {
-        return array[index];
+    public T get(int index) {
+        return (T) array[index];
     }
 
     @Override
-    public int indexOf(Object element) {
+    public int indexOf(T element) {
         int index = -1;
         for (int i = 0; i < size(); i++) {
             if (array[i].equals(element)) {
@@ -85,15 +83,15 @@ public class ArrayList implements List {
     }
 
     @Override
-    public boolean hasNext(Object element) {
+    public boolean hasNext(T element) {
         return indexOf(element) < size() - 1 && indexOf(element) >= 0;
     }
 
 
     @Override
-    public Object next(Object element) {
+    public T next(T element) {
         if (hasNext(element)) {
-            return array[indexOf(element) + 1];
+            return (T) array[indexOf(element) + 1];
         } else {
             throw new NoSuchElementException();
         }
@@ -114,7 +112,7 @@ public class ArrayList implements List {
 
 
     @Override
-    public void remove(Object element) {
+    public void remove(T element) {
         int index = indexOf(element);
         if(index >= 0){
             remove(index);

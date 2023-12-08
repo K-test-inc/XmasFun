@@ -1,21 +1,21 @@
 package com.accenture.internship;
 
-public interface List {
-    void add(Object element);
+public interface List<T> {
+    void add(T element);
 
-    void add(Object element, int index);
+    void add(T element, int index);
 
     int size();
 
-    Object get(int index);
+    T get(int index);
 
-    int indexOf(Object element);
+    int indexOf(T element);
 
-    boolean hasNext(Object element);
+    boolean hasNext(T element);
 
-    Object next(Object element);
+    T next(T element);
 
     void remove(int index);
 
-    void remove(Object element);
+    void remove(T element);
 }
