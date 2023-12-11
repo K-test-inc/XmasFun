@@ -187,27 +187,42 @@ public class LinkedList<T> implements List<T> {
         if (index < 0 || index >= size)
             throw new IndexOutOfBoundsException();
         if (index == 0) {
-            first = first.getNext();
-            first.setPrevious(null);
+            removeFirst();
+        } else {
+            if (index == size - 1) {
+                removeLast();
+            } else {
+                Node<T> currentNode = first;
+                for (int i = 1; i <= index; i++) {
+                    currentNode = currentNode.getNext();
+                }
+                currentNode.getPrevious().setNext(currentNode.getNext());
+                currentNode.getNext().setPrevious(currentNode.getPrevious());
+                currentNode.setNext(null);
+                currentNode.setPrevious(null);
+                size--;
+            }
         }
-        if (index == size - 1) {
-            last = last.getPrevious();
-            last.setNext(null);
-        }
-        Node<T> currentNode = first;
-        for (int i = 1; i <= index; i++) {
-            currentNode = currentNode.getNext();
-        }
-        currentNode.getPrevious().setNext(currentNode.getNext());
-        currentNode.getNext().setPrevious(currentNode.getPrevious());
-        currentNode.setNext(null);
-        currentNode.setPrevious(null);
 
     }
 
     @Override
     public void remove(T element) {
+        remove(indexOf(element));
+    }
 
+    @Override
+    public void removeFirst() {
+        first = first.getNext();
+        first.setPrevious(null);
+        size--;
+    }
+
+    @Override
+    public void removeLast() {
+        last = last.getPrevious();
+        last.setNext(null);
+        size--;
     }
 
     @Override

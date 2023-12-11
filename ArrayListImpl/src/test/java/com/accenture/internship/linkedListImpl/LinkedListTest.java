@@ -356,6 +356,46 @@ public class LinkedListTest extends TestCase {
         assertEquals(-1, list.indexOf("test10"));
     }
 
+    public void testRemoveFirst(){
+        LinkedList<String> list = new LinkedList<>();
+        list.add("test1");
+        list.add("test2");
+        list.add("test3");
+        list.add("test4");
+        list.add("test5");
+        assertEquals(5, list.size());
+
+        list.removeFirst();
+        assertEquals(-1, list.indexOf("test1"));
+        assertEquals(0, list.indexOf("test2"));
+        assertEquals(1, list.indexOf("test3"));
+        assertEquals(2, list.indexOf("test4"));
+        assertEquals(3, list.indexOf("test5"));
+        assertEquals("test2", list.getFirst().getValue());
+        assertEquals("test5", list.getLast().getValue());
+        assertEquals(4, list.size());
+    }
+
+    public void testRemoveLast(){
+        LinkedList<String> list = new LinkedList<>();
+        list.add("test1");
+        list.add("test2");
+        list.add("test3");
+        list.add("test4");
+        list.add("test5");
+        assertEquals(5, list.size());
+
+        list.removeLast();
+        assertEquals(0, list.indexOf("test1"));
+        assertEquals(1, list.indexOf("test2"));
+        assertEquals(2, list.indexOf("test3"));
+        assertEquals(3, list.indexOf("test4"));
+        assertEquals(-1, list.indexOf("test5"));
+        assertEquals("test1", list.getFirst().getValue());
+        assertEquals("test4", list.getLast().getValue());
+        assertEquals(4, list.size());
+    }
+
     public void testRemoveByIndex(){
         LinkedList<String> list = new LinkedList<>();
         list.add("test1");
@@ -371,9 +411,167 @@ public class LinkedListTest extends TestCase {
         assertEquals(2, list.indexOf("test4"));
         assertEquals(3, list.indexOf("test5"));
         assertEquals(4, list.size());
-
-
-
     }
+
+    public void testRemoveByIndex_firstElement(){
+        LinkedList<String> list = new LinkedList<>();
+        list.add("test1");
+        list.add("test2");
+        list.add("test3");
+        list.add("test4");
+        list.add("test5");
+        assertEquals(5, list.size());
+
+        list.remove(0);
+        assertEquals(-1, list.indexOf("test1"));
+        assertEquals(0, list.indexOf("test2"));
+        assertEquals(1, list.indexOf("test3"));
+        assertEquals(2, list.indexOf("test4"));
+        assertEquals(3, list.indexOf("test5"));
+        assertEquals("test2", list.getFirst().getValue());
+        assertEquals("test5", list.getLast().getValue());
+        assertEquals(4, list.size());
+    }
+
+    public void testRemoveByIndex_lastElement(){
+        LinkedList<String> list = new LinkedList<>();
+        list.add("test1");
+        list.add("test2");
+        list.add("test3");
+        list.add("test4");
+        list.add("test5");
+        assertEquals(5, list.size());
+
+        list.removeLast();
+        assertEquals(0, list.indexOf("test1"));
+        assertEquals(1, list.indexOf("test2"));
+        assertEquals(2, list.indexOf("test3"));
+        assertEquals(3, list.indexOf("test4"));
+        assertEquals(-1, list.indexOf("test5"));
+        assertEquals("test1", list.getFirst().getValue());
+        assertEquals("test4", list.getLast().getValue());
+        assertEquals(4, list.size());
+    }
+
+    public void testRemoveByIndex_wrongIndex(){
+        LinkedList<String> list = new LinkedList<>();
+        list.add("test1");
+        list.add("test2");
+        list.add("test3");
+        list.add("test4");
+        list.add("test5");
+        assertEquals(5, list.size());
+
+        assertThrows(IndexOutOfBoundsException.class, () -> list.remove(100));
+        assertEquals(0, list.indexOf("test1"));
+        assertEquals(1, list.indexOf("test2"));
+        assertEquals(2, list.indexOf("test3"));
+        assertEquals(3, list.indexOf("test4"));
+        assertEquals(4, list.indexOf("test5"));
+        assertEquals("test1", list.getFirst().getValue());
+        assertEquals("test5", list.getLast().getValue());
+        assertEquals(5, list.size());
+    }
+
+    public void testRemoveByIndex_lessThenZero(){
+        LinkedList<String> list = new LinkedList<>();
+        list.add("test1");
+        list.add("test2");
+        list.add("test3");
+        list.add("test4");
+        list.add("test5");
+        assertEquals(5, list.size());
+
+        assertThrows(IndexOutOfBoundsException.class, () -> list.remove(-1));
+        assertEquals(0, list.indexOf("test1"));
+        assertEquals(1, list.indexOf("test2"));
+        assertEquals(2, list.indexOf("test3"));
+        assertEquals(3, list.indexOf("test4"));
+        assertEquals(4, list.indexOf("test5"));
+        assertEquals("test1", list.getFirst().getValue());
+        assertEquals("test5", list.getLast().getValue());
+        assertEquals(5, list.size());
+    }
+
+    public void testRemove_wrongElement(){
+        LinkedList<String> list = new LinkedList<>();
+        list.add("test1");
+        list.add("test2");
+        list.add("test3");
+        list.add("test4");
+        list.add("test5");
+        assertEquals(5, list.size());
+
+        assertThrows(IndexOutOfBoundsException.class, () -> list.remove("wrongTest"));
+        assertEquals(0, list.indexOf("test1"));
+        assertEquals(1, list.indexOf("test2"));
+        assertEquals(2, list.indexOf("test3"));
+        assertEquals(3, list.indexOf("test4"));
+        assertEquals(4, list.indexOf("test5"));
+        assertEquals("test1", list.getFirst().getValue());
+        assertEquals("test5", list.getLast().getValue());
+        assertEquals(5, list.size());
+    }
+
+    public void testRemove_removeFirst(){
+        LinkedList<String> list = new LinkedList<>();
+        list.add("test1");
+        list.add("test2");
+        list.add("test3");
+        list.add("test4");
+        list.add("test5");
+        assertEquals(5, list.size());
+
+        list.remove("test1");
+        assertEquals(-1, list.indexOf("test1"));
+        assertEquals(0, list.indexOf("test2"));
+        assertEquals(1, list.indexOf("test3"));
+        assertEquals(2, list.indexOf("test4"));
+        assertEquals(3, list.indexOf("test5"));
+        assertEquals("test2", list.getFirst().getValue());
+        assertEquals("test5", list.getLast().getValue());
+    }
+
+    public void testRemove_removeLast(){
+        LinkedList<String> list = new LinkedList<>();
+        list.add("test1");
+        list.add("test2");
+        list.add("test3");
+        list.add("test4");
+        list.add("test5");
+        assertEquals(5, list.size());
+
+        list.remove("test5");
+        assertEquals(0, list.indexOf("test1"));
+        assertEquals(1, list.indexOf("test2"));
+        assertEquals(2, list.indexOf("test3"));
+        assertEquals(3, list.indexOf("test4"));
+        assertEquals(-1, list.indexOf("test5"));
+        assertEquals("test1", list.getFirst().getValue());
+        assertEquals("test4", list.getLast().getValue());
+        assertEquals(4, list.size());
+    }
+
+    public void testRemove_element(){
+        LinkedList<String> list = new LinkedList<>();
+        list.add("test1");
+        list.add("test2");
+        list.add("test3");
+        list.add("test4");
+        list.add("test5");
+        assertEquals(5, list.size());
+
+        list.remove("test3");
+        assertEquals(0, list.indexOf("test1"));
+        assertEquals(1, list.indexOf("test2"));
+        assertEquals(-1, list.indexOf("test3"));
+        assertEquals(2, list.indexOf("test4"));
+        assertEquals(3, list.indexOf("test5"));
+        assertEquals("test1", list.getFirst().getValue());
+        assertEquals("test5", list.getLast().getValue());
+        assertEquals(4, list.size());
+    }
+
+
 
 }
