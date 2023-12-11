@@ -438,6 +438,61 @@ public class ArrayListTest extends TestCase {
 
     }
 
+    public void testRemoveByIndex_IndexLessThanZero() {
+
+        String[] array = new String[]{"test1", "test2", "test3", "test4", "test5", null, null, null, null, null};
+        ArrayList<String> expectedList = new ArrayList<>(array, 5);
+
+        ArrayList<String> myList = new ArrayList<>();
+        myList.add("test1");
+        myList.add("test2");
+        myList.add("test3");
+        myList.add("test4");
+        myList.add("test5");
+
+        assertThrows(IndexOutOfBoundsException.class, () -> myList.remove(-1));
+
+        assertEquals(5, myList.size());
+        assertEquals(expectedList, myList);
+
+    }
+
+    public void testRemoveFirst() {
+
+        String[] array = new String[]{"test2", "test3", "test4", "test5", null, null, null, null, null, null};
+        ArrayList<String> expectedList = new ArrayList<>(array, 4);
+
+        ArrayList<String> myList = new ArrayList<>();
+        myList.add("test1");
+        myList.add("test2");
+        myList.add("test3");
+        myList.add("test4");
+        myList.add("test5");
+
+        myList.removeFirst();
+        assertEquals(4, myList.size());
+        assertEquals(expectedList, myList);
+
+    }
+
+    public void testRemoveLast() {
+
+        String[] array = new String[]{"test1", "test2", "test3", "test4", null, null, null, null, null, null};
+        ArrayList<String> expectedList = new ArrayList<>(array, 4);
+
+        ArrayList<String> myList = new ArrayList<>();
+        myList.add("test1");
+        myList.add("test2");
+        myList.add("test3");
+        myList.add("test4");
+        myList.add("test5");
+
+        myList.removeLast();
+        assertEquals(4, myList.size());
+        assertEquals(expectedList, myList);
+
+    }
+
     public void testRemoveByObject() {
 
         String[] array = new String[]{"test1", "test2", "test4", "test5", null, null, null, null, null, null};

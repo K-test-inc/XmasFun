@@ -22,4 +22,8 @@ public interface List<T> {
     void remove(int index);
 
     void remove(T element);
+
+    void removeFirst();
+
+    void removeLast();
 }

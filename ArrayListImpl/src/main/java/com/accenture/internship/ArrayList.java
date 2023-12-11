@@ -19,7 +19,7 @@ public class ArrayList<T> implements List<T> {
     }
 
     public void add(T element) {
-        if(size == 0)
+        if (size == 0)
             addFirst(element);
         else
             addLast(element);
@@ -30,7 +30,7 @@ public class ArrayList<T> implements List<T> {
         if (size == 0) {
             array[0] = element;
             size++;
-        }else{
+        } else {
             add(element, 0);
         }
     }
@@ -106,14 +106,21 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public void remove(int index) {
-        if (index >= size)
+        if (index >= size || index < 0)
             throw new IndexOutOfBoundsException();
-        if (index != size()) {
-            for (int i = index; i < size; i++) {
-                array[i] = array[i + 1];
+        if (index == 0) {
+            removeFirst();
+        } else {
+            if (index == size - 1) {
+                removeLast();
+            } else {
+                for (int i = index; i < size; i++) {
+                    array[i] = array[i + 1];
+                }
+                size--;
             }
         }
-        size--;
+
     }
 
 
@@ -124,6 +131,21 @@ public class ArrayList<T> implements List<T> {
             remove(index);
             remove(element);
         }
+    }
+
+    @Override
+    public void removeFirst() {
+        for (int i = 0; i < size() - 1; i++) {
+            array[i] = array[i + 1];
+        }
+        array[size - 1] = null;
+        size--;
+    }
+
+    @Override
+    public void removeLast() {
+        array[size - 1] = null;
+        size--;
     }
 
 
