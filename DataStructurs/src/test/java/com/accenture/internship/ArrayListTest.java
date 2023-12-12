@@ -397,8 +397,23 @@ public class ArrayListTest extends TestCase {
         myList.remove(4);
         assertEquals(4, myList.size());
         assertEquals(expectedList, myList);
+    }
 
+    public void testRemoveByIndex_FirstElement() {
 
+        String[] array = new String[]{"test2", "test3", "test4", "test5", null, null, null, null, null, null};
+        ArrayList<String> expectedList = new ArrayList<>(array, 4);
+
+        ArrayList<String> myList = new ArrayList<>();
+        myList.add("test1");
+        myList.add("test2");
+        myList.add("test3");
+        myList.add("test4");
+        myList.add("test5");
+
+        myList.remove(0);
+        assertEquals(4, myList.size());
+        assertEquals(expectedList, myList);
     }
 
     public void testRemoveByIndex_MiddleElement() {
