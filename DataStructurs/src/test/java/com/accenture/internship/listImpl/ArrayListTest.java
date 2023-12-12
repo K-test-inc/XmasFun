@@ -1,6 +1,7 @@
-package com.accenture.internship;
+package com.accenture.internship.listImpl;
 
-import junit.framework.TestCase;
+
+import junit.framework.*;
 
 import java.util.*;
 
@@ -378,9 +379,7 @@ public class ArrayListTest extends TestCase {
         assertEquals(5, myList.size());
         assertEquals(expectedList, myList);
 
-
     }
-
 
     public void testRemoveByIndex_LastElement() {
 
@@ -532,7 +531,7 @@ public class ArrayListTest extends TestCase {
         String[] array = new String[]{"test1", "test2", "test3", "test5", null, null, null, null, null, null};
         ArrayList<String> expectedList = new ArrayList<>(array, 4);
 
-        String[] arrayBeforeDeleting = new String[]{"test1", "test4", "test2","test3", "test4", "test5", "test4", null, null, null};
+        String[] arrayBeforeDeleting = new String[]{"test1", "test4", "test2", "test3", "test4", "test5", "test4", null, null, null};
         ArrayList<String> expectedListBeforeDeleting = new ArrayList<>(arrayBeforeDeleting, 7);
 
         ArrayList<String> myList = new ArrayList<>();

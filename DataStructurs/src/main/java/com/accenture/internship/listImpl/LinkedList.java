@@ -1,8 +1,4 @@
-package com.accenture.internship.linkedListImpl;
-
-import com.accenture.internship.*;
-import com.accenture.internship.List;
-import lombok.*;
+package com.accenture.internship.listImpl;
 
 import java.util.*;
 

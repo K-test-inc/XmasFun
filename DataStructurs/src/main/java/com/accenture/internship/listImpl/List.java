@@ -1,4 +1,4 @@
-package com.accenture.internship;
+package com.accenture.internship.listImpl;
 
 public interface List<T> {
     void add(T element);

@@ -1,7 +1,7 @@
 package com.accenture.internship;
 
 
-import com.accenture.internship.linkedListImpl.*;
+import com.accenture.internship.listImpl.*;
 
 
 public class Main {

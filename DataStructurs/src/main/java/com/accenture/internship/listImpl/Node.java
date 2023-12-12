@@ -1,4 +1,4 @@
-package com.accenture.internship.linkedListImpl;
+package com.accenture.internship.listImpl;
 
 import java.util.*;
 
