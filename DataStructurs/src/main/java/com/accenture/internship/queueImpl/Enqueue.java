@@ -57,10 +57,12 @@ public class Enqueue<T> implements Queue<T> {
         this.tail = tail;
     }
 
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
+    @Override
     public boolean isFull() {
         return size == DEFAULT_CAPACITY;
     }
