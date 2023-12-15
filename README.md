@@ -9,5 +9,5 @@ Collections:
 * Array List
 * Linked List
 * Endless Queue
+* Endless Priority Queue 
 * Hash Map
-

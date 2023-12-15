@@ -122,7 +122,9 @@ public class Main {
         boolean full = enqueue.isFull();
 
         // Adds an element to the end of queue
-        // If the element was added successfully, returns true. If the queue is full, returns false
+        // If the element was added successfully, returns true.
+        // If the queue is full, returns false
+        // Returns false if null is added
         boolean add = enqueue.add("element");
 
         // Returns the first element of queue
@@ -133,8 +135,35 @@ public class Main {
         // If queue is empty, returns null
         obj = enqueue.poll();
 
-        // Remove first element of queue
-        enqueue.remove();
+        // Prints all queue elements to the console.
+        // If queue is empty, prints "Queue is empty"
+        enqueue.queueDisplay();
+    }
+
+    public void priorityQueueImpl() {
+
+        // Constructs an empty queue with an initial capacity of ten.
+        Queue<Object> enqueue = new Enqueue<>();
+
+        // Checks if the queue is empty
+        boolean empty = enqueue.isEmpty();
+
+        // Checks if there are free cells in queue
+        boolean full = enqueue.isFull();
+
+        // Adds elements depending on priority. Higher priority elements are placed at the beginning of the queue.
+        // If the element was added successfully, returns true.
+        // If the queue is full, returns false
+        // Returns false if null is added
+        boolean add = enqueue.add("element");
+
+        // Returns the first element of queue
+        // If queue is empty, returns null
+        Object obj = enqueue.peek();
+
+        // Returns the first element of queue and remove him
+        // If queue is empty, returns null
+        obj = enqueue.poll();
 
         // Prints all queue elements to the console.
         // If queue is empty, prints "Queue is empty"
@@ -167,4 +196,5 @@ public class Main {
         // Checks if the map is empty
         boolean isEmpty = hashMap.isEmpty();
     }
+
 }

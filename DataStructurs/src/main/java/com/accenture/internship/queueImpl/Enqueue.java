@@ -5,7 +5,6 @@ import java.util.*;
 public class Enqueue<T> implements Queue<T> {
 
     private Object[] array;
-
     private static final int DEFAULT_CAPACITY = 10;
     private int size;
     private int head;
@@ -70,6 +69,8 @@ public class Enqueue<T> implements Queue<T> {
 
     @Override
     public boolean add(T t) {
+        if (t == null)
+            return false;
         if (isFull())
             return false;
         if (isEmpty()) {
@@ -97,6 +98,8 @@ public class Enqueue<T> implements Queue<T> {
     public T poll() {
         if (isEmpty())
             return null;
+        if(head == 10)
+            head = 0;
         T t = (T) array[head];
         array[head] = null;
         head += 1;
@@ -108,10 +111,6 @@ public class Enqueue<T> implements Queue<T> {
         return t;
     }
 
-    @Override
-    public void remove() {
-        poll();
-    }
 
     @Override
     public void queueDisplay() {

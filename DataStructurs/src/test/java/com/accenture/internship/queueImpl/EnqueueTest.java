@@ -99,6 +99,19 @@ class EnqueueTest {
     }
 
     @Test
+    void testAddNull() {
+
+        String[] array = new String[]{null, null, null, null, null, null, null, null, null, null};
+        Enqueue<String> expectedEnqueue = new Enqueue<>(array, 0, -1, -1);
+
+        Enqueue<String> enqueue = new Enqueue<>();
+        assertFalse(enqueue.add(null));
+        assertEquals(0, enqueue.getSize());
+        assertEquals(-1, enqueue.getHead());
+        assertEquals(-1, enqueue.getTail());
+        assertEquals(expectedEnqueue, enqueue);
+    }
+    @Test
     void testAdd_arrayEmpty() {
 
         String[] array = new String[]{"test1", null, null, null, null, null, null, null, null, null};
@@ -403,24 +416,10 @@ class EnqueueTest {
     }
 
     @Test
-    void testRemove_WhenArrayWasEmpty() {
-        String[] array = new String[]{null, null, null, null, null, null, null, null, null, null};
-        Enqueue<String> expectedEnqueue = new Enqueue<>(array, 0, -1, -1);
+    void testAddFullyQueuePoolSixAndAddNewFourElementAndPoolSix_withPriority() {
 
-        Enqueue<String> enqueue = new Enqueue<>();
-
-        enqueue.remove();
-        assertEquals(0, enqueue.getSize());
-        assertEquals(-1, enqueue.getHead());
-        assertEquals(-1, enqueue.getTail());
-        assertEquals(expectedEnqueue, enqueue);
-    }
-
-    @Test
-    void testRemove_ArrayNotEmpty() {
-
-        String[] array = new String[]{null, "test2", "test3", "test4", "test5", null, null, null, null, null};
-        Enqueue<String> expectedEnqueue = new Enqueue<>(array, 4, 1, 4);
+        String[] array = new String[]{null, null, "test13", "test14", null, null, null, null, null, null};
+        Enqueue<String> expectedQueue = new Enqueue<>(array, 2, 2, 3);
 
         Enqueue<String> enqueue = new Enqueue<>();
         enqueue.add("test1");
@@ -428,12 +427,28 @@ class EnqueueTest {
         enqueue.add("test3");
         enqueue.add("test4");
         enqueue.add("test5");
+        enqueue.add("test6");
+        enqueue.add("test7");
+        enqueue.add("test8");
+        enqueue.add("test9");
+        enqueue.add("test10");
+        assertEquals("test1", enqueue.poll());
+        assertEquals("test2", enqueue.poll());
+        assertEquals("test3", enqueue.poll());
+        assertEquals("test4", enqueue.poll());
+        assertEquals("test5", enqueue.poll());
+        assertEquals("test6", enqueue.poll());
+        enqueue.add("test11");
+        enqueue.add("test12");
+        enqueue.add("test13");
+        enqueue.add("test14");
+        assertEquals("test7", enqueue.poll());
+        assertEquals("test8", enqueue.poll());
+        assertEquals("test9", enqueue.poll());
+        assertEquals("test10", enqueue.poll());
+        assertEquals("test11", enqueue.poll());
+        assertEquals("test12", enqueue.poll());
 
-        enqueue.remove();
-        assertEquals(4, enqueue.getSize());
-        assertEquals(1, enqueue.getHead());
-        assertEquals(4, enqueue.getTail());
-        assertEquals(expectedEnqueue, enqueue);
     }
 
     @Test
@@ -495,7 +510,7 @@ class EnqueueTest {
         enqueue.add("test3");
         enqueue.add("test4");
         enqueue.add("test5");
-        enqueue.remove();
+        enqueue.poll();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
@@ -517,11 +532,11 @@ class EnqueueTest {
         enqueue.add("test3");
         enqueue.add("test4");
         enqueue.add("test5");
-        enqueue.remove();
-        enqueue.remove();
-        enqueue.remove();
-        enqueue.remove();
-        enqueue.remove();
+        enqueue.poll();
+        enqueue.poll();
+        enqueue.poll();
+        enqueue.poll();
+        enqueue.poll();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
@@ -558,9 +573,9 @@ class EnqueueTest {
         enqueue.add("test8");
         enqueue.add("test9");
         enqueue.add("test10");
-        enqueue.remove();
-        enqueue.remove();
-        enqueue.remove();
+        enqueue.poll();
+        enqueue.poll();
+        enqueue.poll();
         enqueue.add("test11");
         enqueue.add("test12");
 
