@@ -96,6 +96,46 @@ public class BinarySearchTreeImpl<K extends Comparable<K>, V> implements BinaryS
             return null;
     }
 
+    protected Node findPreviousNode(K k) {
+        if (root == null)
+            return null;
+        Node<K, V> current = root;
+        boolean found = false;
+        while (true) {
+            if(current.getLeft() == null && current.getRight() == null){
+                break;
+            }
+            if(current.getLeft() != null)
+            {
+                if(current.getLeft().getValue().equals(k)) {
+                    found = true;
+                    break;
+                }
+            }
+            if(current.getRight() != null){
+                if(current.getRight().getValue().equals(k)) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (k.compareTo(current.getKey()) <= 0) {
+                current = current.getLeft();
+            } else {
+                if (k.compareTo(current.getKey()) >= 0) {
+                    current = current.getRight();
+                } else {
+                    break;
+                }
+            }
+        }
+        if (found) {
+            return current;
+        } else
+            return null;
+    }
+
+
     @Override
     public V delete(K k) {
         Node current = findNode(k);

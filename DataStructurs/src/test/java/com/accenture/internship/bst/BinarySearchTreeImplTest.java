@@ -379,7 +379,7 @@ class BinarySearchTreeImplTest {
     }
 
     @Test
-    void testFind_FourLevels() {
+    void testFind_FiveLevels() {
 /*
                 10
                /  \
@@ -418,6 +418,102 @@ class BinarySearchTreeImplTest {
         assertEquals(35, tree.find(35));
         assertEquals(50, tree.find(50));
         assertNull(tree.find(55));
+    }
+
+    @Test
+    void testFindPreviousNode_EmptyTree() {
+        BinarySearchTreeImpl tree = new BinarySearchTreeImpl();
+        assertNull(tree.findPreviousNode(1));
+    }
+
+    @Test
+    void testFindPreviousNode_OneElementTree() {
+        BinarySearchTreeImpl tree = new BinarySearchTreeImpl();
+        tree.insert(10, 10);
+
+        assertNull(tree.findPreviousNode(10));
+        assertNull(tree.findPreviousNode(1));
+    }
+
+    @Test
+    void testFindPreviousNode_TwoLevelTree() {
+        Node<Integer, Integer> expectedNode = new Node<>(10, 10, new Node<>(5, 5), new Node<>(15, 15));
+
+        BinarySearchTreeImpl tree = new BinarySearchTreeImpl();
+        tree.insert(10, 10);
+        tree.insert(5, 5);
+        tree.insert(15, 15);
+
+        assertEquals(expectedNode, tree.findPreviousNode(5));
+        assertEquals(expectedNode, tree.findPreviousNode(15));
+    }
+
+    @Test
+    void testFindPreviousNode_FiveLevelTree() {
+        /*
+                10
+               /  \
+              5    15
+             / \    \
+            2   7    25
+           / \   \    \
+          1   3   8    35
+                      /  \
+                     30   50
+                    /
+                   29
+*/
+        Node<Integer, Integer> expectedNode1 = new Node<>(1, 1);
+        Node<Integer, Integer> expectedNode2 = new Node<>(2, 2);
+        Node<Integer, Integer> expectedNode3 = new Node<>(3, 3);
+        Node<Integer, Integer> expectedNode5 = new Node<>(5, 5);
+        Node<Integer, Integer> expectedNode7 = new Node<>(7, 7);
+        Node<Integer, Integer> expectedNode8 = new Node<>(8, 8);
+        Node<Integer, Integer> expectedNode10 = new Node<>(10, 10);
+        Node<Integer, Integer> expectedNode15 = new Node<>(15, 15);
+        Node<Integer, Integer> expectedNode25 = new Node<>(25, 25);
+        Node<Integer, Integer> expectedNode30 = new Node<>(30, 30);
+        Node<Integer, Integer> expectedNode29 = new Node<>(29, 29);
+        Node<Integer, Integer> expectedNode35 = new Node<>(35, 35);
+        Node<Integer, Integer> expectedNode50 = new Node<>(50, 50);
+        expectedNode10.setLeft(expectedNode5);
+        expectedNode10.setRight(expectedNode15);
+        expectedNode5.setLeft(expectedNode2);
+        expectedNode5.setRight(expectedNode7);
+        expectedNode2.setLeft(expectedNode1);
+        expectedNode2.setRight(expectedNode3);
+        expectedNode7.setRight(expectedNode8);
+        expectedNode15.setRight(expectedNode25);
+        expectedNode25.setRight(expectedNode35);
+        expectedNode30.setLeft(expectedNode29);
+        expectedNode35.setLeft(expectedNode30);
+        expectedNode35.setRight(expectedNode50);
+
+        BinarySearchTreeImpl tree = new BinarySearchTreeImpl();
+        tree.insert(10, 10);
+        tree.insert(5, 5);
+        tree.insert(15, 15);
+        tree.insert(7, 7);
+        tree.insert(8, 8);
+        tree.insert(2, 2);
+        tree.insert(25, 25);
+        tree.insert(1, 1);
+        tree.insert(3, 3);
+        tree.insert(35, 35);
+        tree.insert(30, 30);
+        tree.insert(50, 50);
+        tree.insert(29, 29);
+        assertNull(tree.findPreviousNode(10));
+        assertEquals(expectedNode10, tree.findPreviousNode(5));
+        assertEquals(expectedNode5, tree.findPreviousNode(2));
+        assertEquals(expectedNode5, tree.findPreviousNode(7));
+        assertEquals(expectedNode2, tree.findPreviousNode(1));
+        assertEquals(expectedNode2, tree.findPreviousNode(3));
+        assertEquals(expectedNode7, tree.findPreviousNode(8));
+        assertEquals(expectedNode25, tree.findPreviousNode(35));
+        assertEquals(expectedNode35, tree.findPreviousNode(30));
+        assertEquals(expectedNode35, tree.findPreviousNode(50));
+        assertEquals(expectedNode30, tree.findPreviousNode(29));
     }
 
     @Test
