@@ -49,7 +49,7 @@ class BinarySearchTreeImplTest {
     }
 
     @Test
-    void testInsert_addElementToRightAndToLeft(){
+    void testInsert_addElementToRightAndToLeft() {
         Node<Integer, Integer> node = new Node<>(10, 10);
         Node<Integer, Integer> nodeRight = new Node<>(15, 15);
         Node<Integer, Integer> nodeLeft = new Node<>(5, 5);
@@ -72,8 +72,8 @@ class BinarySearchTreeImplTest {
     }
 
     @Test
-    void testInsert_addElementToRightAndToLeft_Strings(){
-        Node<String, String > node = new Node<>("6test", "6test");
+    void testInsert_addElementToRightAndToLeft_Strings() {
+        Node<String, String> node = new Node<>("6test", "6test");
         Node<String, String> nodeRight = new Node<>("7test", "7test");
         Node<String, String> nodeLeft = new Node<>("5test", "5test");
         node.setLeft(nodeLeft);
@@ -89,14 +89,14 @@ class BinarySearchTreeImplTest {
     }
 
     @Test
-    void testGetTopElement_emptyTree(){
+    void testGetTopElement_emptyTree() {
         BinarySearchTree tree = new BinarySearchTreeImpl();
 
         assertNull(tree.getTopElement());
     }
 
     @Test
-    void testGetTopElement_oneElementInTree(){
+    void testGetTopElement_oneElementInTree() {
         BinarySearchTree tree = new BinarySearchTreeImpl();
         tree.insert(10, 10);
         Integer topElement = (Integer) tree.getTopElement();
@@ -104,7 +104,7 @@ class BinarySearchTreeImplTest {
     }
 
     @Test
-    void testInsert_addTwoSameElementToLeft(){
+    void testInsert_addTwoSameElementToLeft() {
 
         Node<Integer, Integer> expectedNode = new Node<>(10, 10);
         Node<Integer, Integer> nodeLeft = new Node<>(5, 5);
@@ -124,7 +124,7 @@ class BinarySearchTreeImplTest {
     }
 
     @Test
-    void testInsert_addTwoSameElementToRight(){
+    void testInsert_addTwoSameElementToRight() {
 
         Node<Integer, Integer> expectedNode = new Node<>(10, 10);
         Node<Integer, Integer> expectedNodeRight = new Node<>(15, 15);
@@ -143,7 +143,7 @@ class BinarySearchTreeImplTest {
     }
 
     @Test
-    void testInsert_addNewElementWithExistsKeyToLeft(){
+    void testInsert_addNewElementWithExistsKeyToLeft() {
 
         Node<Integer, Integer> expectedNode = new Node<>(10, 10);
         Node<Integer, Integer> expectedNodeLeft = new Node<>(5, 50);
@@ -163,7 +163,7 @@ class BinarySearchTreeImplTest {
     }
 
     @Test
-    void testInsert_addNewElementWithExistsKeyToRight(){
+    void testInsert_addNewElementWithExistsKeyToRight() {
 
         Node<Integer, Integer> expectedNode = new Node<>(10, 10);
         Node<Integer, Integer> expectedNodeRight = new Node<>(15, 150);
@@ -182,7 +182,7 @@ class BinarySearchTreeImplTest {
     }
 
     @Test
-    void testInsert_addToLeftRightLeft(){
+    void testInsert_addToLeftRightLeft() {
 
         Node<Integer, Integer> expectedNode = new Node<>(10, 10);
         Node<Integer, Integer> expectedNodeRight = new Node<>(15, 15);
@@ -207,7 +207,7 @@ class BinarySearchTreeImplTest {
     }
 
     @Test
-    void testInsert_addThreeLevelsLeft(){
+    void testInsert_addFourLevelsLeft() {
 
 /*
                 10
@@ -217,6 +217,8 @@ class BinarySearchTreeImplTest {
             2   7
            / \   \
           1   3   8
+               \
+                4
 */
 
         Node<Integer, Integer> expectedNode = new Node<>(10, 10);
@@ -227,6 +229,7 @@ class BinarySearchTreeImplTest {
         Node<Integer, Integer> expectedNode1 = new Node<>(1, 1);
         Node<Integer, Integer> expectedNode3 = new Node<>(3, 3);
         Node<Integer, Integer> expectedNode8 = new Node<>(8, 8);
+        Node<Integer, Integer> expectedNode4 = new Node<>(4, 4);
 
         expectedNode.setLeft(expectedNode5);
         expectedNode.setRight(expectedNode15);
@@ -235,6 +238,7 @@ class BinarySearchTreeImplTest {
         expectedNode2.setLeft(expectedNode1);
         expectedNode2.setRight(expectedNode3);
         expectedNode7.setRight(expectedNode8);
+        expectedNode3.setRight(expectedNode4);
         BinarySearchTreeImpl expectedTree = new BinarySearchTreeImpl(expectedNode);
 
         BinarySearchTreeImpl tree = new BinarySearchTreeImpl();
@@ -244,8 +248,9 @@ class BinarySearchTreeImplTest {
         tree.insert(7, 7);
         tree.insert(8, 8);
         tree.insert(2, 2);
-        tree.insert(1, 1);
         tree.insert(3, 3);
+        tree.insert(1, 1);
+        tree.insert(4, 4);
 
         Node resultingNode = tree.getRoot();
         Node resultingNode15 = resultingNode.getRight();
@@ -255,6 +260,7 @@ class BinarySearchTreeImplTest {
         Node resultingNode8 = resultingNode7.getRight();
         Node resultingNode1 = resultingNode2.getLeft();
         Node resultingNode3 = resultingNode2.getRight();
+        Node resultingNode4 = resultingNode3.getRight();
 
         assertEquals(expectedTree, tree);
         assertEquals(expectedNode, resultingNode);
@@ -302,15 +308,15 @@ class BinarySearchTreeImplTest {
         BinarySearchTreeImpl expectedTree = new BinarySearchTreeImpl(expectedNode);
 
         BinarySearchTreeImpl tree = new BinarySearchTreeImpl();
-        tree.insert(10,10);
-        tree.insert(15,15);
-        tree.insert(15,15);
-        tree.insert(12,12);
-        tree.insert(11,11);
-        tree.insert(25,25);
-        tree.insert(28,28);
-        tree.insert(20,20);
-        tree.insert(16,16);
+        tree.insert(10, 10);
+        tree.insert(15, 15);
+        tree.insert(15, 15);
+        tree.insert(12, 12);
+        tree.insert(11, 11);
+        tree.insert(25, 25);
+        tree.insert(28, 28);
+        tree.insert(20, 20);
+        tree.insert(16, 16);
 
         Node resultingNode = tree.getRoot();
         Node resultingNode15 = resultingNode.getRight();
@@ -335,14 +341,26 @@ class BinarySearchTreeImplTest {
 
     @Test
     void testFind_EmptyTree() {
-
         BinarySearchTreeImpl tree = new BinarySearchTreeImpl();
         assertNull(tree.find(1));
-
     }
 
     @Test
-    void testFind_oneLevel() {
+    void testFind_successfullyOneTree() {
+        BinarySearchTreeImpl tree = new BinarySearchTreeImpl();
+        tree.insert(10, 10);
+        assertEquals(10, tree.find(10));
+    }
+
+    @Test
+    void testFind_unsuccessfullyOneTree() {
+        BinarySearchTreeImpl tree = new BinarySearchTreeImpl();
+        tree.insert(10, 10);
+        assertNull(tree.find(1));
+    }
+
+    @Test
+    void testFind_twoLevels() {
         /*
                 10
                /  \
@@ -352,15 +370,16 @@ class BinarySearchTreeImplTest {
         tree.insert(10, 10);
         tree.insert(5, 5);
         tree.insert(15, 15);
+        assertNull(tree.find(1));
         assertEquals(5, tree.find(5));
         assertEquals(10, tree.find(10));
         assertEquals(15, tree.find(15));
+
 
     }
 
     @Test
     void testFind_FourLevels() {
-
 /*
                 10
                /  \
@@ -398,8 +417,48 @@ class BinarySearchTreeImplTest {
         assertEquals(30, tree.find(30));
         assertEquals(35, tree.find(35));
         assertEquals(50, tree.find(50));
-
-
+        assertNull(tree.find(55));
     }
+
+    @Test
+    void testDelete_EmptyTree() {
+        BinarySearchTreeImpl tree = new BinarySearchTreeImpl();
+
+        assertNull(tree.delete(1));
+    }
+
+    @Test
+    void testDelete_successfullyOneElementTree() {
+        BinarySearchTreeImpl tree = new BinarySearchTreeImpl();
+        tree.insert(10, 10);
+
+        assertEquals(10, tree.delete(10));
+    }
+
+    @Test
+    void testDelete_unsuccessfullyOneElementTree() {
+        BinarySearchTreeImpl tree = new BinarySearchTreeImpl();
+        tree.insert(10, 10);
+
+        assertNull(tree.delete(1));
+    }
+
+    @Test
+    void testDelete_successfulLeafDeleting() {
+        Node<Integer, Integer> expectedNode = new Node<>(10, 10);
+        BinarySearchTreeImpl expectedTree = new BinarySearchTreeImpl(expectedNode);
+
+        BinarySearchTreeImpl tree = new BinarySearchTreeImpl();
+        tree.insert(10, 10);
+        tree.insert(5, 5);
+        tree.insert(15, 15);
+
+        assertEquals(5, tree.delete(5));
+        assertEquals(15, tree.delete(15));
+        assertEquals(10, tree.find(10));
+        assertEquals(expectedTree, tree);
+        assertEquals(expectedNode, tree.getRoot());
+    }
+
 
 }

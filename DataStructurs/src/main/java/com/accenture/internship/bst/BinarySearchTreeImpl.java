@@ -55,35 +55,59 @@ public class BinarySearchTreeImpl<K extends Comparable<K>, V> implements BinaryS
 
     @Override
     public V find(K k) {
+        Node current = findNode(k);
+        if (current != null)
+            return (V) current.getValue();
+        else
+            return null;
+    }
+
+    private Node findNode(K k) {
         if (root == null)
             return null;
         Node<K, V> current = root;
+        boolean found = false;
         while (true) {
-            if(current.getValue().equals(k))
-                return current.getValue();
+            if (current.getValue().equals(k)) {
+                found = true;
+                break;
+            }
             if (k.compareTo(current.getKey()) <= 0) {
                 if (current.getLeft() == null) {
-                    return current.getValue();
+                    break;
                 } else {
                     current = current.getLeft();
                 }
             } else {
                 if (k.compareTo(current.getKey()) >= 0) {
                     if (current.getRight() == null) {
-                        return current.getValue();
+                        break;
                     } else {
                         current = current.getRight();
                     }
-                } else{
-                    return current.getValue();
+                } else {
+                    break;
                 }
             }
         }
+        if (found) {
+            return current;
+        } else
+            return null;
     }
 
     @Override
     public V delete(K k) {
-        return null;
+        Node current = findNode(k);
+        if (current == null)
+            return null;
+        Node previous = root;
+        if (current.getLeft() == null && current.getRight() == null) {
+            V value = (V) current.getValue();
+            current = null;
+            return value;
+        } else return null;
+
     }
 
     @Override
