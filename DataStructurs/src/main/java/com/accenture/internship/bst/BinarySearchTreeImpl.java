@@ -22,7 +22,6 @@ public class BinarySearchTreeImpl<K extends Comparable<K>, V> implements BinaryS
 
     }
 
-
     @Override
     public void insert(K k, V v) {
 
@@ -30,9 +29,7 @@ public class BinarySearchTreeImpl<K extends Comparable<K>, V> implements BinaryS
             root = new Node<>(k, v);
             return;
         }
-
         Node<K, V> current = root;
-
         while (true) {
             if (k.compareTo(current.getKey()) < 0) {
                 if (current.getLeft() == null) {
@@ -47,7 +44,7 @@ public class BinarySearchTreeImpl<K extends Comparable<K>, V> implements BinaryS
                         return;
                     }
                     current = current.getRight();
-                }else{
+                } else {
                     current.setValue(v);
                     return;
                 }
@@ -58,7 +55,30 @@ public class BinarySearchTreeImpl<K extends Comparable<K>, V> implements BinaryS
 
     @Override
     public V find(K k) {
-        return null;
+        if (root == null)
+            return null;
+        Node<K, V> current = root;
+        while (true) {
+            if(current.getValue().equals(k))
+                return current.getValue();
+            if (k.compareTo(current.getKey()) <= 0) {
+                if (current.getLeft() == null) {
+                    return current.getValue();
+                } else {
+                    current = current.getLeft();
+                }
+            } else {
+                if (k.compareTo(current.getKey()) >= 0) {
+                    if (current.getRight() == null) {
+                        return current.getValue();
+                    } else {
+                        current = current.getRight();
+                    }
+                } else{
+                    return current.getValue();
+                }
+            }
+        }
     }
 
     @Override

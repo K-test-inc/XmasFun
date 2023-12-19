@@ -331,6 +331,74 @@ class BinarySearchTreeImplTest {
         assertEquals(expectedNode25, resultingNode25);
         assertEquals(expectedNode28, resultingNode28);
 
+    }
+
+    @Test
+    void testFind_EmptyTree() {
+
+        BinarySearchTreeImpl tree = new BinarySearchTreeImpl();
+        assertNull(tree.find(1));
+
+    }
+
+    @Test
+    void testFind_oneLevel() {
+        /*
+                10
+               /  \
+              5   15
+        */
+        BinarySearchTreeImpl tree = new BinarySearchTreeImpl();
+        tree.insert(10, 10);
+        tree.insert(5, 5);
+        tree.insert(15, 15);
+        assertEquals(5, tree.find(5));
+        assertEquals(10, tree.find(10));
+        assertEquals(15, tree.find(15));
+
+    }
+
+    @Test
+    void testFind_FourLevels() {
+
+/*
+                10
+               /  \
+              5    15
+             / \    \
+            2   7    25
+           / \   \    \
+          1   3   8    35
+                      /  \
+                     30   50
+*/
+        BinarySearchTreeImpl tree = new BinarySearchTreeImpl();
+        tree.insert(10, 10);
+        tree.insert(5, 5);
+        tree.insert(15, 15);
+        tree.insert(7, 7);
+        tree.insert(8, 8);
+        tree.insert(2, 2);
+        tree.insert(25, 25);
+        tree.insert(1, 1);
+        tree.insert(3, 3);
+        tree.insert(35, 35);
+        tree.insert(30, 30);
+        tree.insert(50, 50);
+
+        assertEquals(1, tree.find(1));
+        assertEquals(2, tree.find(2));
+        assertEquals(3, tree.find(3));
+        assertEquals(5, tree.find(5));
+        assertEquals(7, tree.find(7));
+        assertEquals(8, tree.find(8));
+        assertEquals(10, tree.find(10));
+        assertEquals(15, tree.find(15));
+        assertEquals(25, tree.find(25));
+        assertEquals(30, tree.find(30));
+        assertEquals(35, tree.find(35));
+        assertEquals(50, tree.find(50));
+
 
     }
 
