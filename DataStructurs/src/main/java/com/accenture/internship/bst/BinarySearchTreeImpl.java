@@ -55,14 +55,14 @@ public class BinarySearchTreeImpl<K extends Comparable<K>, V> implements BinaryS
 
     @Override
     public V find(K k) {
-        Node current = findNode(k);
+        Node<K, V> current = findNode(k);
         if (current != null)
-            return (V) current.getValue();
+            return current.getValue();
         else
             return null;
     }
 
-    private Node findNode(K k) {
+    private Node<K, V> findNode(K k) {
         if (root == null)
             return null;
         Node<K, V> current = root;
@@ -96,58 +96,106 @@ public class BinarySearchTreeImpl<K extends Comparable<K>, V> implements BinaryS
             return null;
     }
 
-    protected Node findPreviousNode(K k) {
-        if (root == null)
-            return null;
-        Node<K, V> current = root;
-        boolean found = false;
-        while (true) {
-            if(current.getLeft() == null && current.getRight() == null){
-                break;
-            }
-            if(current.getLeft() != null)
-            {
-                if(current.getLeft().getValue().equals(k)) {
-                    found = true;
-                    break;
-                }
-            }
-            if(current.getRight() != null){
-                if(current.getRight().getValue().equals(k)) {
-                    found = true;
-                    break;
-                }
-            }
-
-            if (k.compareTo(current.getKey()) <= 0) {
-                current = current.getLeft();
-            } else {
-                if (k.compareTo(current.getKey()) >= 0) {
-                    current = current.getRight();
-                } else {
-                    break;
-                }
-            }
-        }
-        if (found) {
-            return current;
-        } else
-            return null;
-    }
-
-
     @Override
     public V delete(K k) {
-        Node current = findNode(k);
+        Node<K, V> current = findNode(k);
         if (current == null)
             return null;
-        Node previous = root;
+        Node<K, V> previous = findPreviousNode(k);
+        V value = current.getValue();
         if (current.getLeft() == null && current.getRight() == null) {
-            V value = (V) current.getValue();
-            current = null;
+            if (previous != null) {
+                if (previous.getLeft() != null) {
+                    if (previous.getLeft().equals(current))
+                        previous.setLeft(null);
+                    else previous.setRight(null);
+                } else previous.setRight(null);
+            } else {
+                root = null;
+            }
             return value;
-        } else return null;
+        } else {
+            if (current.getLeft() != null && current.getRight() == null) {
+                if (previous == null) {
+                    root = current.getLeft();
+                    return value;
+                }
+                if (previous.getLeft() != null) {
+                    if (previous.getLeft().equals(current))
+                        previous.setLeft(current.getLeft());
+                    else
+                        previous.setRight(current.getLeft());
+                } else {
+                    if (previous.getRight().equals(current))
+                        previous.setRight(current.getLeft());
+                    else
+                        previous.setLeft(current.getLeft());
+                }
+                current = null;
+                return value;
+            }
+            if (current.getLeft() == null && current.getRight() != null) {
+                if (previous == null) {
+                    root = current.getRight();
+                    return value;
+                }
 
+                if (previous.getRight() != null) {
+                    if (previous.getRight().equals(current))
+                        previous.setRight(current.getRight());
+                    else
+                        previous.setLeft(current.getRight());
+                } else {
+                    if (previous.getLeft().equals(current))
+                        previous.setLeft(current.getRight());
+                    else
+                        previous.setRight(current.getRight());
+                }
+                current = null;
+                return value;
+            }
+            if (current.getLeft() != null && current.getRight() != null) {
+                Node<K, V> newBrand = current.getRight();
+                while (true) {
+                    if (newBrand.getLeft() != null) {
+                        newBrand = newBrand.getLeft();
+                    } else {
+                        break;
+                    }
+                }
+                Node newBrandPrevious = findPreviousNode(newBrand.getKey());
+                if (!newBrandPrevious.equals(previous)) {
+                    if (!newBrandPrevious.equals(current))
+                        if (newBrandPrevious.getLeft().equals(newBrand))
+                            newBrandPrevious.setLeft(null);
+                        else {
+                            if (newBrandPrevious.getRight().equals(newBrand)) {
+                                newBrandPrevious.setRight(null);
+                            }
+                        }
+                }
+                if (previous == null) {
+                    if (root.getLeft() != null)
+                        newBrand.setLeft(root.getLeft());
+                    if (root.getRight() != null && !root.getRight().equals(newBrand))
+                        newBrand.setRight(root.getRight());
+                    root = newBrand;
+                    return value;
+                }
+                if (previous.getLeft() != null && previous.getLeft().equals(current))
+                    previous.setLeft(newBrand);
+                if (previous.getRight() != null && previous.getRight().equals(current))
+                    previous.setRight(newBrand);
+                if (current.getLeft() != null && !current.getLeft().equals(newBrand))
+                    newBrand.setLeft(current.getLeft());
+                if (current.getRight() != null && !current.getRight().equals(newBrand))
+                    newBrand.setRight(current.getRight());
+
+                current = null;
+                return value;
+            }
+            return null;
+        }
     }
 
     @Override
@@ -183,5 +231,45 @@ public class BinarySearchTreeImpl<K extends Comparable<K>, V> implements BinaryS
     @Override
     public int hashCode() {
         return Objects.hash(root);
+    }
+
+    protected Node<K, V> findPreviousNode(K k) {
+        if (root == null)
+            return null;
+        Node<K, V> current = root;
+        boolean found = false;
+        while (true) {
+            if (current.getLeft() == null && current.getRight() == null) {
+                break;
+            }
+            if (current.getLeft() != null) {
+                if (current.getLeft().getValue().equals(k)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (current.getRight() != null) {
+                if (current.getRight().getValue().equals(k)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (k.compareTo(current.getKey()) == 0)
+                return null;
+
+            if (k.compareTo(current.getKey()) < 0) {
+                current = current.getLeft();
+            } else {
+                if (k.compareTo(current.getKey()) > 0) {
+                    current = current.getRight();
+                } else {
+                    break;
+                }
+            }
+        }
+        if (found) {
+            return current;
+        } else
+            return null;
     }
 }
