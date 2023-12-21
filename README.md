@@ -11,3 +11,10 @@ Collections:
 * Endless Queue
 * Endless Priority Queue 
 * Hash Map
+* Binary Search Tree
+
+Sorting algorithms:
+* Bubble sort
+* Selection sort
+* Merge sort
+* Quick sort
