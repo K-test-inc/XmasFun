@@ -1,6 +1,8 @@
 package com.accenture.internship;
 
 
+import com.accenture.internship.bst.*;
+import com.accenture.internship.bst.Node;
 import com.accenture.internship.listImpl.*;
 import com.accenture.internship.mapImpl.*;
 import com.accenture.internship.queueImpl.*;
@@ -197,4 +199,38 @@ public class Main {
         boolean isEmpty = hashMap.isEmpty();
     }
 
+    public void binarySearchTreeImpl(){
+
+        // Constructs an empty Binary Search Tree
+        BinarySearchTree<Object, Object> tree = new BinarySearchTreeImpl();
+
+        //Adds a new element to the tree
+        //If the key value is null, prints to the console "Key cannot be null"
+        //If the element exists, changes its value to a new one
+        tree.insert("Key", "Value");
+
+        //Returns the value of an element by key
+        //In case of an empty tree, a non-existent key, or a key equal to null, returns null
+        Object  obj = tree.find("Key");
+
+        //takes the key value
+        //Returns the value of the removed element
+        //In case of an empty tree, a non-existent key, or a key equal to null, returns null
+        obj = tree.delete("Key");
+
+        //Prints to the console the value of the elements when traversing the tree in-order
+        //Prints null in case of an empty tree, a non-existent key, or if the key value is null
+        tree.inOrderTraverse("Key");
+
+        //Prints to the console the value of the elements when traversing the tree pre-order
+        //Prints null in case of an empty tree, a non-existent key, or if the key value is null
+        tree.preOrderTraverse("Key");
+
+        //Prints to the console the value of the elements when traversing the tree in post-order
+        //Prints null in case of an empty tree, a non-existent key, or if the key value is null
+        tree.postOrderTraverse("Key");
+
+        // Return root element
+        Node<Object, Object> root = tree.getTopElement();
+    }
 }
