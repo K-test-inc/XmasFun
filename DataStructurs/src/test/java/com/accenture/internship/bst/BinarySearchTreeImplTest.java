@@ -2,6 +2,8 @@ package com.accenture.internship.bst;
 
 import org.junit.jupiter.api.*;
 
+import java.io.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BinarySearchTreeImplTest {
@@ -16,6 +18,24 @@ class BinarySearchTreeImplTest {
         tree.insert(10, 10);
 
         assertEquals(expectedTree, tree);
+    }
+
+    @Test
+    void testInsert_nullElement() {
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("Key cannot be null");
+        String expectedOutput = builder.toString();
+
+        BinarySearchTree<Integer, Integer> tree = new BinarySearchTreeImpl<Integer, Integer>();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        tree.insert(null, 0);
+        String actualOutput = outputStream.toString().trim();
+        System.setOut(System.out);
+
+        assertEquals(expectedOutput, actualOutput);
     }
 
     @Test
@@ -346,6 +366,16 @@ class BinarySearchTreeImplTest {
     }
 
     @Test
+    void testFind_NullKey() {
+        BinarySearchTreeImpl<Integer, Integer> tree = new BinarySearchTreeImpl<Integer, Integer>();
+        tree.insert(10, 10);
+        tree.insert(5, 5);
+        tree.insert(15, 15);
+        assertNull(tree.find(null));
+    }
+
+
+    @Test
     void testFind_successfullyOneTree() {
         BinarySearchTreeImpl<Integer, Integer> tree = new BinarySearchTreeImpl<Integer, Integer>();
         tree.insert(10, 10);
@@ -521,6 +551,15 @@ class BinarySearchTreeImplTest {
         BinarySearchTreeImpl<Integer, Object> tree = new BinarySearchTreeImpl<Integer, Object>();
 
         assertNull(tree.delete(1));
+    }
+
+    @Test
+    void testDelete_NullKey() {
+        BinarySearchTreeImpl<Integer, Integer> tree = new BinarySearchTreeImpl<Integer, Integer>();
+        tree.insert(10, 10);
+        tree.insert(5, 5);
+        tree.insert(15, 15);
+        assertNull(tree.delete(null));
     }
 
     @Test
@@ -992,7 +1031,7 @@ class BinarySearchTreeImplTest {
         Node<Integer, Integer> expectedNode6 = new Node<>(6, 6);
         Node<Integer, Integer> expectedNode7 = new Node<>(7, 7);
         Node<Integer, Integer> expectedNode8 = new Node<>(8, 8);
-     //   Node<Integer, Integer> expectedNode10 = new Node<>(10, 10);
+        //   Node<Integer, Integer> expectedNode10 = new Node<>(10, 10);
         Node<Integer, Integer> expectedNode15 = new Node<>(15, 15);
         Node<Integer, Integer> expectedNode25 = new Node<>(25, 25);
         Node<Integer, Integer> expectedNode29 = new Node<>(29, 29);
@@ -1229,5 +1268,168 @@ class BinarySearchTreeImplTest {
 
         assertEquals(new BinarySearchTreeImpl<>(), tree);
     }
+
+    @Test
+    void testPreOrderTraverse_emptyTree() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("null");
+        String expectedOutput = builder.toString();
+
+        BinarySearchTreeImpl<Integer, Integer> tree = new BinarySearchTreeImpl<Integer, Integer>();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        tree.preOrderTraverse(0);
+        String actualOutput = outputStream.toString().trim();
+        System.setOut(System.out);
+
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    void testPreOrderTraverse_nullKey() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("null");
+        String expectedOutput = builder.toString();
+
+        BinarySearchTreeImpl<Integer, Integer> tree = new BinarySearchTreeImpl<Integer, Integer>();
+        tree.insert(10, 10);
+        tree.insert(5, 5);
+        tree.insert(15, 15);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        tree.preOrderTraverse(null);
+        String actualOutput = outputStream.toString().trim();
+        System.setOut(System.out);
+
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    void testPreOrderTraverse_SmallTreeStartRoot() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(10).append(System.lineSeparator())
+                .append(5).append(System.lineSeparator())
+                .append(15);
+        String expectedOutput = builder.toString();
+
+        BinarySearchTreeImpl<Integer, Integer> tree = new BinarySearchTreeImpl<Integer, Integer>();
+        tree.insert(10, 10);
+        tree.insert(5, 5);
+        tree.insert(15, 15);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        tree.preOrderTraverse(10);
+        String actualOutput = outputStream.toString().trim();
+        System.setOut(System.out);
+
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    void testPreOrderTraverse_LargeTreeStartRoot() {
+                        /*
+               10
+              /   \
+             5     15
+            /  \    \
+           2    7    25
+          / \   /\    \
+         1   3 6  8   35
+                      / \
+                     30  50
+                    /
+                   29
+*/
+        BinarySearchTreeImpl<Integer, Integer> tree = new BinarySearchTreeImpl<Integer, Integer>();
+        tree.insert(10, 10);
+        tree.insert(5, 5);
+        tree.insert(15, 15);
+        tree.insert(7, 7);
+        tree.insert(8, 8);
+        tree.insert(2, 2);
+        tree.insert(25, 25);
+        tree.insert(1, 1);
+        tree.insert(3, 3);
+        tree.insert(35, 35);
+        tree.insert(30, 30);
+        tree.insert(50, 50);
+        tree.insert(29, 29);
+        tree.insert(6, 6);
+        StringBuilder builder = new StringBuilder();
+        builder.append(10).append(System.lineSeparator())
+                .append(5).append(System.lineSeparator())
+                .append(2).append(System.lineSeparator())
+                .append(1).append(System.lineSeparator())
+                .append(3).append(System.lineSeparator())
+                .append(7).append(System.lineSeparator())
+                .append(6).append(System.lineSeparator())
+                .append(8).append(System.lineSeparator())
+                .append(15).append(System.lineSeparator())
+                .append(25).append(System.lineSeparator())
+                .append(35).append(System.lineSeparator())
+                .append(30).append(System.lineSeparator())
+                .append(29).append(System.lineSeparator())
+                .append(50);
+        String expectedOutput = builder.toString();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        tree.preOrderTraverse(10);
+        String actualOutput = outputStream.toString().trim();
+        System.setOut(System.out);
+
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    void testPreOrderTraverse_LargeTreeStartNotRoot() {
+                        /*
+               10
+              /   \
+             5     15
+            /  \    \
+           2    7    25
+          / \   /\    \
+         1   3 6  8   35
+                      / \
+                     30  50
+                    /
+                   29
+*/
+        BinarySearchTreeImpl<Integer, Integer> tree = new BinarySearchTreeImpl<Integer, Integer>();
+        tree.insert(10, 10);
+        tree.insert(5, 5);
+        tree.insert(15, 15);
+        tree.insert(7, 7);
+        tree.insert(8, 8);
+        tree.insert(2, 2);
+        tree.insert(25, 25);
+        tree.insert(1, 1);
+        tree.insert(3, 3);
+        tree.insert(35, 35);
+        tree.insert(30, 30);
+        tree.insert(50, 50);
+        tree.insert(29, 29);
+        tree.insert(6, 6);
+        StringBuilder builder = new StringBuilder();
+        builder.append(25).append(System.lineSeparator())
+                .append(35).append(System.lineSeparator())
+                .append(30).append(System.lineSeparator())
+                .append(29).append(System.lineSeparator())
+                .append(50);
+        String expectedOutput = builder.toString();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        tree.preOrderTraverse(25);
+        String actualOutput = outputStream.toString().trim();
+        System.setOut(System.out);
+
+        assertEquals(expectedOutput, actualOutput);
+    }
+
 
 }

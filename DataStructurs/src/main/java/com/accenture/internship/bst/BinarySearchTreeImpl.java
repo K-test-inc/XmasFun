@@ -25,6 +25,10 @@ public class BinarySearchTreeImpl<K extends Comparable<K>, V> implements BinaryS
     @Override
     public void insert(K k, V v) {
 
+        if (k == null) {
+            System.out.println("Key cannot be null");
+            return;
+        }
         if (root == null) {
             root = new Node<>(k, v);
             return;
@@ -49,7 +53,6 @@ public class BinarySearchTreeImpl<K extends Comparable<K>, V> implements BinaryS
                     return;
                 }
             }
-
         }
     }
 
@@ -63,6 +66,8 @@ public class BinarySearchTreeImpl<K extends Comparable<K>, V> implements BinaryS
     }
 
     private Node<K, V> findNode(K k) {
+        if (k == null)
+            return null;
         if (root == null)
             return null;
         Node<K, V> current = root;
@@ -199,17 +204,27 @@ public class BinarySearchTreeImpl<K extends Comparable<K>, V> implements BinaryS
     }
 
     @Override
-    public void inOrderTraverse(Node<K, V> node) {
+    public void inOrderTraverse(K k) {
 
     }
 
     @Override
-    public void preOrderTraverse(Node<K, V> node) {
+    public void preOrderTraverse(K k) {
 
+        Node<K, V> node = findNode(k);
+        if (node == null) {
+            System.out.println("null");
+            return;
+        }
+        System.out.println(node.getValue());
+        if(node.getLeft() != null)
+            preOrderTraverse(node.getLeft().getKey());
+        if(node.getRight() != null)
+            preOrderTraverse(node.getRight().getKey());
     }
 
     @Override
-    public void postOrderTraverse(Node<K, V> node) {
+    public void postOrderTraverse(K k) {
 
     }
 
