@@ -1,0 +1,42 @@
+test1 results:
+Execution time bubble sorting for array long 100: 0.3927 milliseconds
+Execution time selection sorting for array long 100: 0.2329 milliseconds
+Execution time merge sorting for array long 100: 0.0837 milliseconds
+Execution time quick sorting for array long 100: 0.0618 milliseconds
+---------------------------------------------
+Execution time bubble sorting for array long 1000: 12.2313 milliseconds
+Execution time selection sorting for array long 1000: 4.8753 milliseconds
+Execution time merge sorting for array long 1000: 0.6548 milliseconds
+Execution time quick sorting for array long 1000: 0.4547 milliseconds
+---------------------------------------------
+Execution time bubble sorting for array long 10000: 258.2632 milliseconds
+Execution time selection sorting for array long 10000: 86.893 milliseconds
+Execution time merge sorting for array long 10000: 2.3941 milliseconds
+Execution time quick sorting for array long 10000: 5.2375 milliseconds
+---------------------------------------------
+Execution time bubble sorting for array long 100000: 30391.6149 milliseconds
+Execution time selection sorting for array long 100000: 6744.2523 milliseconds
+Execution time merge sorting for array long 100000: 71.0004 milliseconds
+Execution time quick sorting for array long 100000: 32.7069 milliseconds
+/////////////////////////////////////////////
+test2 results:
+Execution time bubble sorting for array long 100: 0.6641 milliseconds
+Execution time selection sorting for array long 100: 0.247 milliseconds
+Execution time merge sorting for array long 100: 0.111 milliseconds
+Execution time quick sorting for array long 100: 0.1119 milliseconds
+---------------------------------------------
+Execution time bubble sorting for array long 1000: 11.8532 milliseconds
+Execution time selection sorting for array long 1000: 5.1635 milliseconds
+Execution time merge sorting for array long 1000: 0.7131 milliseconds
+Execution time quick sorting for array long 1000: 0.4901 milliseconds
+---------------------------------------------
+Execution time bubble sorting for array long 10000: 298.6048 milliseconds
+Execution time selection sorting for array long 10000: 140.7071 milliseconds
+Execution time merge sorting for array long 10000: 2.315 milliseconds
+Execution time quick sorting for array long 10000: 7.8914 milliseconds
+---------------------------------------------
+Execution time bubble sorting for array long 100000: 36503.3817 milliseconds
+Execution time selection sorting for array long 100000: 9451.648 milliseconds
+Execution time merge sorting for array long 100000: 90.9363 milliseconds
+Execution time quick sorting for array long 100000: 27.9367 milliseconds
+---------------------------------------------
