@@ -205,12 +205,20 @@ public class BinarySearchTreeImpl<K extends Comparable<K>, V> implements BinaryS
 
     @Override
     public void inOrderTraverse(K k) {
-
+        Node<K, V> node = findNode(k);
+        if (node == null) {
+            System.out.println("null");
+            return;
+        }
+        if(node.getLeft() != null)
+            inOrderTraverse(node.getLeft().getKey());
+        System.out.println(node.getValue());
+        if(node.getRight() != null)
+            inOrderTraverse(node.getRight().getKey());
     }
 
     @Override
     public void preOrderTraverse(K k) {
-
         Node<K, V> node = findNode(k);
         if (node == null) {
             System.out.println("null");
@@ -225,7 +233,16 @@ public class BinarySearchTreeImpl<K extends Comparable<K>, V> implements BinaryS
 
     @Override
     public void postOrderTraverse(K k) {
-
+        Node<K, V> node = findNode(k);
+        if (node == null) {
+            System.out.println("null");
+            return;
+        }
+        if(node.getLeft() != null)
+            postOrderTraverse(node.getLeft().getKey());
+        if(node.getRight() != null)
+            postOrderTraverse(node.getRight().getKey());
+        System.out.println(node.getValue());
     }
 
     @Override
