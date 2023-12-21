@@ -119,8 +119,28 @@ class BinarySearchTreeImplTest {
     void testGetTopElement_oneElementInTree() {
         BinarySearchTree<Integer, Integer> tree = new BinarySearchTreeImpl<>();
         tree.insert(10, 10);
-        Integer topElement = tree.getTopElement();
-        assertEquals(10, topElement);
+        Node topElement = tree.getTopElement();
+        assertEquals(new Node<>(10, 10), topElement);
+    }
+
+    @Test
+    void testGetTopElement_notEmptyTree() {
+        Node<Integer, Integer> expectedNode = new Node<>(10, 10);
+        Node<Integer, Integer> expectedNodeRight = new Node<>(15, 15);
+        Node<Integer, Integer> expectedNodeLeft = new Node<>(5, 5);
+        Node<Integer, Integer> expectedNodeLeft2 = new Node<>(7, 7);
+        expectedNodeLeft.setRight(expectedNodeLeft2);
+        expectedNode.setRight(expectedNodeRight);
+        expectedNode.setLeft(expectedNodeLeft);
+        BinarySearchTreeImpl<Integer, Integer> expectedTree = new BinarySearchTreeImpl<>(expectedNode);
+
+        BinarySearchTreeImpl<Integer, Integer> tree = new BinarySearchTreeImpl<Integer, Integer>();
+        tree.insert(10, 10);
+        tree.insert(5, 5);
+        tree.insert(15, 15);
+        tree.insert(7, 7);
+        Node topElement = tree.getTopElement();
+        assertEquals(expectedNode, topElement);
     }
 
     @Test

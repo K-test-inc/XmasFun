@@ -8,5 +8,5 @@ public interface BinarySearchTree<K, V> {
     void inOrderTraverse(K k);
     void preOrderTraverse(K k);
     void postOrderTraverse(K k);
-    V getTopElement();
+    Node<K, V> getTopElement();
 }

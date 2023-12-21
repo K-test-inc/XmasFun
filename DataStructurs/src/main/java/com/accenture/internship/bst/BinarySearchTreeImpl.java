@@ -246,10 +246,10 @@ public class BinarySearchTreeImpl<K extends Comparable<K>, V> implements BinaryS
     }
 
     @Override
-    public V getTopElement() {
+    public Node<K, V> getTopElement() {
         if (root == null)
             return null;
-        else return (V) root.getValue();
+        else return root;
     }
 
     @Override
