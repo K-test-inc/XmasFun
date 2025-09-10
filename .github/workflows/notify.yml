@@ -1,31 +1,31 @@
-#name: Notify Team on Release Github Actions
-#
-#on:
-#  release:
-#    types: [published]
-#
-#jobs:
-#  notify:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Send Teams notification
-#        run: |
-#          curl -H "Content-Type: application/json" \
-#               -d "{\"text\": \"New release: ${{ github.repository }} @ ${{ github.ref }}\"}" \
-#               ${{ secrets.TEAMS_WEBHOOK_URL }}
-
-
-name: Notify on Release (call central workflow)
+name: Notify Team on Release Github Actions
 
 on:
   release:
     types: [published]
 
 jobs:
-  call-notify:
-    uses: Jefremov/org-actions/.github/workflows/notify.yml@main
-    with:
-      message: "New release in ${{ github.repository }}: ${{ github.ref }}"
-      enabled: true
-    secrets:
-      TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Teams notification
+        run: |
+          curl -H "Content-Type: application/json" \
+               -d "{\"text\": \"New release: ${{ github.repository }} @ ${{ github.ref }}\"}" \
+               ${{ secrets.TEAMS_WEBHOOK_URL }}
+
+
+#name: Notify on Release (call central workflow)
+#
+#on:
+#  release:
+#    types: [published]
+#
+#jobs:
+#  call-notify:
+#    uses: Jefremov/org-actions/.github/workflows/notify.yml@main
+#    with:
+#      message: "New release in ${{ github.repository }}: ${{ github.ref }}"
+#      enabled: true
+#    secrets:
+#      TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
