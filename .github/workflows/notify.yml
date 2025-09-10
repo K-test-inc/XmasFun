@@ -23,7 +23,7 @@ on:
 
 jobs:
   call-notify:
-    uses: my_name/org-actions/.github/workflows/notify.yml@main
+    uses: Jefremov/org-actions/.github/workflows/notify.yml@main
     with:
       message: "New release in ${{ github.repository }}: ${{ github.ref }}"
       enabled: true
