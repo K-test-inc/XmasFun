@@ -23,8 +23,9 @@ on:
 
 jobs:
   call-notify:
-    uses: Jefremov/org-actions/.github/workflows/notify.yml@main
+    uses: my_name/org-actions/.github/workflows/notify.yml@main
     with:
       message: "New release in ${{ github.repository }}: ${{ github.ref }}"
+      enabled: true
     secrets:
       TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
