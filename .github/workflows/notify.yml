@@ -10,8 +10,8 @@ jobs:
     with:
       message: "New release in ${{ github.repository }}: ${{ github.ref }}"
       enabled: true
-    secrets:
-      TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOKS_JSON }}
+    # secrets:
+    #   TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOKS_JSON }}
 
 #name: Notify Team on Release Github Actions
 #
