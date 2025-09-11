@@ -6,6 +6,7 @@ on:
 
 jobs:
   call-notify:
+    if: ${{ !(contains(github.ref, 'demo') || contains(github.ref, 'staging')) }}
     uses: K-test-inc/org-actions/.github/workflows/notify.yml@main
     with:
       message: "New release in ${{ github.repository }}: ${{ github.ref }}"
