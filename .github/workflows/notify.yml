@@ -6,7 +6,7 @@ on:
 
 jobs:
   call-notify:
-    if: ${{ !(contains(github.ref, 'demo') || contains(github.ref, 'staging') || contains(github.repository, 'example')) }}
+    if: ${{ !(contains(github.ref, 'demo') || contains(github.ref, 'staging') || contains(github.event.release.name, 'example') || contains(github.repository, 'example')) }}
     uses: K-test-inc/org-actions/.github/workflows/notify.yml@main
     with:
       message: "New release in ${{ github.repository }}: ${{ github.ref }}"
