@@ -1,19 +1,37 @@
-name: Notify on Release (call central workflow)
-
+###recipients filter####
+name: Notify Team
 on:
   release:
-    types: [published]
-
+    types: [released]
 jobs:
-  call-notify:
-    if: ${{ !(contains(github.ref, 'demo') || contains(github.ref, 'staging') || contains(github.event.release.name, 'example') || contains(github.repository, 'example')) }}
-    uses: K-test-inc/org-actions/.github/workflows/notify.yml@main
+  notify:
+    uses: org_name/org-actions/.github/workflows/notify-teams.yml@main
     with:
-      message: "New release in ${{ github.repository }}: ${{ github.event.release.name }}"
+      message: "New library released: ${{ github.repository }} @ ${{ github.ref }}"
       enabled: true
+      recipients: "dev,qa"  # specify which teams to notify
     secrets:
       TEAMS_DEV_WEBHOOK: ${{ secrets.TEAMS_DEV_WEBHOOK }}
       TEAMS_QA_WEBHOOK: ${{ secrets.TEAMS_QA_WEBHOOK }}
+
+
+######message filter ###############
+# name: Notify on Release (call central workflow)
+
+# on:
+#   release:
+#     types: [published]
+
+# jobs:
+#   call-notify:
+#     if: ${{ !(contains(github.ref, 'demo') || contains(github.ref, 'staging') || contains(github.event.release.name, 'example') || contains(github.repository, 'example')) }}
+#     uses: K-test-inc/org-actions/.github/workflows/notify.yml@main
+#     with:
+#       message: "New release in ${{ github.repository }}: ${{ github.event.release.name }}"
+#       enabled: true
+#     secrets:
+#       TEAMS_DEV_WEBHOOK: ${{ secrets.TEAMS_DEV_WEBHOOK }}
+#       TEAMS_QA_WEBHOOK: ${{ secrets.TEAMS_QA_WEBHOOK }}
 
 #############example with filter####
 # name: Notify on Release (call central workflow)
