@@ -5,7 +5,7 @@ on:
     types: [released]
 jobs:
   notify:
-    uses: K-test-inc/org-actions/.github/workflows/notify-teams.yml@main
+    uses: K-test-inc/org-actions/.github/workflows/notify.yml@main
     with:
       message: "New library released: ${{ github.repository }} @ ${{ github.ref }}"
       enabled: true
