@@ -9,7 +9,7 @@ jobs:
     with:
       message: "New library released: ${{ github.repository }} @ ${{ github.ref }}"
       enabled: true
-      recipients: "dev,qa"  # specify which teams to notify
+      recipients: "dev,private"  # specify which teams to notify
     secrets:
       # TEAMS_DEV_WEBHOOK: ${{ secrets.TEAMS_DEV_WEBHOOK }}
       # TEAMS_QA_WEBHOOK: ${{ secrets.TEAMS_QA_WEBHOOK }}
