@@ -1,3 +1,20 @@
+# name: Notify on Release (call central workflow)
+
+# on:
+#   release:
+#     types: [published]
+
+# jobs:
+#   call-notify:
+#     if: ${{ !(contains(github.ref, 'demo') || contains(github.ref, 'staging') || contains(github.event.release.name, 'example') || contains(github.repository, 'example')) }}
+#     uses: K-test-inc/org-actions/.github/workflows/notify.yml@main
+#     with:
+#       message: "New release in ${{ github.repository }}: ${{ github.ref }}"
+#       enabled: true
+#     secrets:
+#       TEAMS_WEBHOOKS_JSON: ${{ secrets.TEAMS_WEBHOOKS_JSON }}
+
+######################################
 name: Notify on Release (call central workflow)
 
 on:
@@ -11,8 +28,6 @@ jobs:
     with:
       message: "New release in ${{ github.repository }}: ${{ github.ref }}"
       enabled: true
-    secrets:
-      TEAMS_WEBHOOKS_JSON: ${{ secrets.TEAMS_WEBHOOKS_JSON }}
 
 #name: Notify Team on Release Github Actions
 #
