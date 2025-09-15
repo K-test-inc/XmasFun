@@ -6,14 +6,11 @@ on:
 
 jobs:
   call-notify:
-#    if: ${{ !(contains(github.ref, 'demo') || contains(github.ref, 'staging') || contains(github.event.release.name, 'example') || contains(github.repository, 'example')) }}
+    if: ${{ !(contains(github.ref, 'demo') || contains(github.ref, 'staging') || contains(github.event.release.name, 'example') || contains(github.repository, 'example')) }}
     uses: K-test-inc/org-actions/.github/workflows/notify.yml@main
     with:
-      message: "New release in ${{ github.repository }}: ${{ github.ref }}"
+      message: "New release in ${{ github.repository }}: ${{ github.event.release.name }}"
       enabled: true
-    secrets:
-       TEAMS_DEV_WEBHOOK: ${{ secrets.TEAMS_DEV_WEBHOOK }}
-       TEAMS_QA_WEBHOOK: ${{ secrets.TEAMS_QA_WEBHOOK }}
 
 #############example with filter####
 # name: Notify on Release (call central workflow)
