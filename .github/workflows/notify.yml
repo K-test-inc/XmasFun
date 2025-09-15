@@ -11,6 +11,9 @@ jobs:
     with:
       message: "New release in ${{ github.repository }}: ${{ github.event.release.name }}"
       enabled: true
+    secrets:
+      TEAMS_DEV_WEBHOOK: ${{ secrets.TEAMS_DEV_WEBHOOK }}
+      TEAMS_QA_WEBHOOK: ${{ secrets.TEAMS_QA_WEBHOOK }}
 
 #############example with filter####
 # name: Notify on Release (call central workflow)
